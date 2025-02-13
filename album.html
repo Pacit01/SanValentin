@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álbum de Fotos - Paco & Angela</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Botón de retroceso usando CSS -->
+    <div class="retroceso my-3">
+        <a href="index.html" class="boton-retroceso">←</a>
+    </div>
+
+    <!-- Se agrupan los corazones en un contenedor para mejor posicionamiento -->
+    <div class="corazones">
+        <div class="corazon">❤</div>
+        <div class="corazon" style="left:10%; animation-delay:0.5s">❤</div>
+        <div class="corazon" style="left:20%; animation-delay:1s">❤</div>
+        <div class="corazon" style="left:30%; animation-delay:1.5s">❤</div>
+        <div class="corazon" style="left:40%; animation-delay:2s">❤</div>
+        <div class="corazon" style="left:50%; animation-delay:2.5s">❤</div>
+        <div class="corazon" style="left:60%; animation-delay:3s">❤</div>
+        <div class="corazon" style="left:70%; animation-delay:3.5s">❤</div>
+        <div class="corazon" style="left:80%; animation-delay:4s">❤</div>
+        <div class="corazon" style="left:90%; animation-delay:4.5s">❤</div>
+        <div class="corazon" style="left:15%; animation-delay:5s">❤</div>
+        <div class="corazon" style="left:25%; animation-delay:5.5s">❤</div>
+        <div class="corazon" style="left:35%; animation-delay:6s">❤</div>
+        <div class="corazon" style="left:45%; animation-delay:6.5s">❤</div>
+        <div class="corazon" style="left:55%; animation-delay:7s">❤</div>
+        <div class="corazon" style="left:65%; animation-delay:7.5s">❤</div>
+        <div class="corazon" style="left:75%; animation-delay:8s">❤</div>
+        <div class="corazon" style="left:85%; animation-delay:8.5s">❤</div>
+        <div class="corazon" style="left:95%; animation-delay:9s">❤</div>
+    </div>
+
+    <!-- Portada del álbum -->
+    <div class="portada">
+        <h1>Álbum de Nuestros Recuerdos</h1>
+    </div>
+
+    <div class="galeria" id="galeria">
+        <img src="fotos/1.jpeg" class="imagen-galeria">
+        <img src="fotos/2.jpeg" class="imagen-galeria">
+        <img src="fotos/3.jpeg" class="imagen-galeria">
+        <img src="fotos/4.jpeg" class="imagen-galeria">
+        <img src="fotos/5.jpeg" class="imagen-galeria">
+        <img src="fotos/6.jpeg" class="imagen-galeria">
+        <img src="fotos/7.jpeg" class="imagen-galeria">
+        <!-- Botón para insertar fotos -->
+        <div class="imagen-galeria insertar-foto">
+            <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
+            <button class="btn btn-primary" onclick="document.getElementById('fileInput').click();">Insertar Foto</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const galeria = document.getElementById('galeria');
+            const storedImages = JSON.parse(localStorage.getItem('imagenes')) || [];
+            storedImages.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'imagen-galeria';
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'imagen-galeria';
+                img.style.objectFit = 'contain';
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-danger btn-borrar';
+                btn.innerText = 'Borrar';
+                btn.onclick = function() {
+                    galeria.removeChild(div);
+                    const updatedImages = storedImages.filter(image => image !== src);
+                    localStorage.setItem('imagenes', JSON.stringify(updatedImages));
+                };
+                div.appendChild(img);
+                div.appendChild(btn);
+                galeria.insertBefore(div, galeria.lastElementChild);
+            });
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const galeria = document.getElementById('galeria');
+            const storedImages = JSON.parse(localStorage.getItem('imagenes')) || [];
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'imagen-galeria';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'imagen-galeria';
+                    img.style.objectFit = 'contain';
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-danger btn-borrar';
+                    btn.innerText = 'Borrar';
+                    btn.onclick = function() {
+                        galeria.removeChild(div);
+                        const updatedImages = storedImages.filter(image => image !== e.target.result);
+                        localStorage.setItem('imagenes', JSON.stringify(updatedImages));
+                    };
+                    div.appendChild(img);
+                    div.appendChild(btn);
+                    galeria.insertBefore(div, galeria.lastElementChild);
+                    storedImages.push(e.target.result);
+                    localStorage.setItem('imagenes', JSON.stringify(storedImages));
+                }
+                reader.readAsDataURL(files[i]);
+            }
+        });
+    </script>
+</body>
+</html>

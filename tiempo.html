@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paco & Angela - Nuestro Amor</title>
+    <title>Tiempo Juntos - Paco & Angela</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Corazones animados -->
+    <!-- Botón de retroceso usando CSS -->
+    <div class="retroceso my-3">
+        <a href="index.html" class="boton-retroceso">←</a>
+    </div>
+
+    <!-- Se agrupan los corazones en un contenedor para mejor posicionamiento -->
     <div class="corazones">
         <div class="corazon">❤</div>
         <div class="corazon" style="left:10%; animation-delay:0.5s">❤</div>
@@ -31,42 +37,37 @@
         <div class="corazon" style="left:95%; animation-delay:9s">❤</div>
     </div>
 
-    <!-- Portada -->
+    <!-- Portada del tiempo juntos -->
     <div class="portada">
-        <div class="foto-portada">
-            <img src="fotos/portada.jpeg" alt="Paco y Angela">
-        </div>
-        <h1>Paco & Angela</h1>
+        <h1>Tiempo Juntos</h1>
     </div>
 
-    <!-- Navegación -->
     <div class="botones-contenedor">
-        <a href="album.html" class="boton-pagina">
-            <h2>📸 Nuestro Álbum</h2>
-            <p>Nuestros mejores momentos</p>
-        </a>
-        
-        <a href="tiempo.html" class="boton-pagina">
-            <h2>⏳ Nuestro Tiempo</h2>
-            <p>Desde aquel primer día...</p>
-        </a>
-        
-        <a href="cupones.html" class="boton-pagina">
-            <h2>🎡 Cupones de Amor</h2>
-            <p>Gana premios especiales</p>
-        </a>
-        
-        <a href="carta.html" class="boton-pagina">
-            <h2>💌 Mi Carta</h2>
-            <p>Lo que siento por ti</p>
-        </a>
-        
-        <a href="contestacion.html" class="boton-pagina">
-            <h2>💬 Contestación</h2>
-            <p>Tu respuesta</p>
-        </a>
+        <div class="boton-pagina" style="grid-column: 1/-1">
+            <h2>⏳ Nuestro Tiempo Juntos</h2>
+            <div id="contador" style="font-size: 2rem; color: var(--rojo);"></div>
+        </div>
     </div>
 
     <script src="main.js"></script>
+    <script>
+        function calcularTiempoJuntos(fechaInicio) {
+            const ahora = new Date();
+            const inicio = new Date(fechaInicio);
+            const diferencia = ahora - inicio;
+
+            const años = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365));
+            const meses = Math.floor((diferencia % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const días = Math.floor((diferencia % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+
+            return `${años} años, ${meses} meses y ${días} días`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const fechaInicio = '2023-10-22'; // Cambia esta fecha a la fecha de inicio de tu relación
+            const contador = document.getElementById('contador');
+            contador.innerText = calcularTiempoJuntos(fechaInicio);
+        });
+    </script>
 </body>
 </html>

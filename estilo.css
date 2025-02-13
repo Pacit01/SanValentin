@@ -1,0 +1,311 @@
+:root {
+    --rosa: #ff69b4;
+    --rojo: #ff3366;
+    --blanco: #fff0f5;
+    --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(45deg, var(--rosa), var(--rojo));
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Corazones animados */
+.corazon {
+    position: absolute;
+    top: -10%;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 20px;
+    animation: caer 10s linear infinite; /* Cambiado de 10s a 5s */
+    pointer-events: none;
+}
+
+@keyframes caer {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* Portada unificada */
+.portada {
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.foto-portada {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 5px solid var(--blanco);
+    margin: 1rem auto;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    position: relative;
+}
+
+.foto-portada img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    color: var(--blanco);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
+}
+
+/* Botones/Navegación */
+.botones-contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.boton-pagina {
+    background: rgba(255, 255, 255, 0.587);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--rojo);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--sombra);
+    border: 2px solid rgba(253, 0, 0, 0.2);
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.boton-pagina:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.boton-pagina h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos específicos para cada página */
+/* Contador de tiempo */
+.contador-contenedor {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+#contador {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: var(--rojo);
+    line-height: 1.6;
+}
+
+/* Galería */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.galeria img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    box-shadow: var(--sombra);
+}
+
+.galeria img:hover {
+    transform: scale(1.05);
+}
+
+/* Ruleta */
+.ruleta-contenedor {
+    padding: 3rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.ruleta {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    position: relative;
+    overflow: hidden;
+    background: #03000024;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    transition: transform 3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ruleta img {
+    width: 100%;
+    height: 100%;
+    transition: transform 2s ease-out;
+}
+
+.seccion-ruleta {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 50%, 100% 50%, 50% 0);
+    transform-origin: 50% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Carta */
+.carta-contenedor {
+    background: rgba(255, 255, 255, 0.95);
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+}
+
+.carta-contenido {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #333;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* Cupón */
+.cupon-contenedor {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cupon-contenedor img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Modal Cupón */
+.cupon-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cupon-modal-content {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 70%; /* Reducir el tamaño de la caja */
+    max-height: 90%;
+    box-shadow: var(--sombra);
+    position: relative;
+}
+
+.cupon-modal-content img {
+    width: 90%; /* Hacer la imagen más grande */
+    height: auto;
+    margin-bottom: 10px;
+}
+.cupon-modal-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1px;
+}
+
+.boton-descarga {
+    background: linear-gradient(45deg, var(--rojo), #ff0033);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid rgb(0, 0, 0);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.boton-descarga:hover {
+    background: linear-gradient(50deg, #ff0033, var(--rojo));
+    box-shadow: 0 5px 10px rgba(255, 51, 102, 0.6);
+    transform: scale(1.2);
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    .botones-contenedor {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .boton-pagina {
+        padding: 1.5rem;
+    }
+}

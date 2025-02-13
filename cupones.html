@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paco & Angela - Nuestro Amor</title>
+    <title>Cupones de Amor - Paco & Angela</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Corazones animados -->
+    <!-- Botón de retroceso usando CSS -->
+    <div class="retroceso my-3">
+        <a href="index.html" class="boton-retroceso">←</a>
+    </div>
+
+    <!-- Se agrupan los corazones en un contenedor para mejor posicionamiento -->
     <div class="corazones">
         <div class="corazon">❤</div>
         <div class="corazon" style="left:10%; animation-delay:0.5s">❤</div>
@@ -31,40 +38,33 @@
         <div class="corazon" style="left:95%; animation-delay:9s">❤</div>
     </div>
 
-    <!-- Portada -->
     <div class="portada">
         <div class="foto-portada">
             <img src="fotos/portada.jpeg" alt="Paco y Angela">
         </div>
-        <h1>Paco & Angela</h1>
+        <h1>Cupones de Amor</h1>
     </div>
 
-    <!-- Navegación -->
-    <div class="botones-contenedor">
-        <a href="album.html" class="boton-pagina">
-            <h2>📸 Nuestro Álbum</h2>
-            <p>Nuestros mejores momentos</p>
-        </a>
-        
-        <a href="tiempo.html" class="boton-pagina">
-            <h2>⏳ Nuestro Tiempo</h2>
-            <p>Desde aquel primer día...</p>
-        </a>
-        
-        <a href="cupones.html" class="boton-pagina">
-            <h2>🎡 Cupones de Amor</h2>
-            <p>Gana premios especiales</p>
-        </a>
-        
-        <a href="carta.html" class="boton-pagina">
-            <h2>💌 Mi Carta</h2>
-            <p>Lo que siento por ti</p>
-        </a>
-        
-        <a href="contestacion.html" class="boton-pagina">
-            <h2>💬 Contestación</h2>
-            <p>Tu respuesta</p>
-        </a>
+    <!-- Sección de la ruleta, centrada y con transiciones -->
+    <div class="ruleta-contenedor">
+        <div class="ruleta" id="ruleta">
+            <img src="fotos/ruleta.png" alt="Ruleta de Amor" id="ruleta-img">
+        </div>
+        <button onclick="girarRuleta()" class="boton-pagina">
+            ¡Gira la Ruleta! 💖
+        </button>
+    </div>
+
+    <!-- Modal para mostrar el cupón -->
+    <div id="cuponModal" class="cupon-modal" style="display: none;">
+        <div class="cupon-modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <img id="cupon-img" src="" alt="Cupón de Amor">
+            <div class="cupon-modal-footer">
+                <a id="descargar-cupon" class="boton-descarga" href="#">Descargar</a>
+            </div>
+            
+        </div>
     </div>
 
     <script src="main.js"></script>

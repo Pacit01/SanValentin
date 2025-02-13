@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Amor - Paco & Angela</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Botón de retroceso usando CSS -->
+    <div class="retroceso my-3">
+        <a href="index.html" class="boton-retroceso">←</a>
+    </div>
+
+    <!-- Se agrupan los corazones en un contenedor para mejor posicionamiento -->
+    <div class="corazones">
+        <div class="corazon">❤</div>
+        <div class="corazon" style="left:10%; animation-delay:0.5s">❤</div>
+        <div class="corazon" style="left:20%; animation-delay:1s">❤</div>
+        <div class="corazon" style="left:30%; animation-delay:1.5s">❤</div>
+        <div class="corazon" style="left:40%; animation-delay:2s">❤</div>
+        <div class="corazon" style="left:50%; animation-delay:2.5s">❤</div>
+        <div class="corazon" style="left:60%; animation-delay:3s">❤</div>
+        <div class="corazon" style="left:70%; animation-delay:3.5s">❤</div>
+        <div class="corazon" style="left:80%; animation-delay:4s">❤</div>
+        <div class="corazon" style="left:90%; animation-delay:4.5s">❤</div>
+        <div class="corazon" style="left:15%; animation-delay:5s">❤</div>
+        <div class="corazon" style="left:25%; animation-delay:5.5s">❤</div>
+        <div class="corazon" style="left:35%; animation-delay:6s">❤</div>
+        <div class="corazon" style="left:45%; animation-delay:6.5s">❤</div>
+        <div class="corazon" style="left:55%; animation-delay:7s">❤</div>
+        <div class="corazon" style="left:65%; animation-delay:7.5s">❤</div>
+        <div class="corazon" style="left:75%; animation-delay:8s">❤</div>
+        <div class="corazon" style="left:85%; animation-delay:8.5s">❤</div>
+        <div class="corazon" style="left:95%; animation-delay:9s">❤</div>
+    </div>
+
+    <!-- Portada de la carta -->
+    <div class="portada">
+        <h1>Carta de Amor</h1>
+    </div>
+
+    <!-- Área de texto para la carta -->
+    <div class="carta-contenedor">
+        <textarea id="carta" class="carta-texto" placeholder="Escribe tu carta aquí..."></textarea>
+        <button class="btn btn-primary" onclick="guardarCarta()">Guardar Carta</button>
+    </div>
+
+    <!-- Buzón de cartas -->
+    <div class="buzon">
+        <h2>Buzón de Cartas</h2>
+        <ul id="listaCartas"></ul>
+    </div>
+
+    <!-- Modal para mostrar el contenido de la carta -->
+    <div id="modalCarta" class="modal">
+        <div class="modal-contenido" style="overflow-y: auto;">
+            <span class="cerrar" onclick="cerrarModal()">&times;</span>
+            <p id="contenidoCarta" class="carta-texto" style="white-space: pre-wrap;"></p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function guardarCarta() {
+            const carta = document.getElementById('carta').value;
+            if (carta) {
+                const cartas = JSON.parse(localStorage.getItem('cartas')) || [];
+                cartas.push(carta);
+                localStorage.setItem('cartas', JSON.stringify(cartas));
+                mostrarCartas();
+                document.getElementById('carta').value = '';
+            }
+        }
+
+        function borrarCarta(index) {
+            const cartas = JSON.parse(localStorage.getItem('cartas')) || [];
+            cartas.splice(index, 1);
+            localStorage.setItem('cartas', JSON.stringify(cartas));
+            mostrarCartas();
+        }
+
+        function mostrarCartas() {
+            const cartas = JSON.parse(localStorage.getItem('cartas')) || [];
+            const listaCartas = document.getElementById('listaCartas');
+            listaCartas.innerHTML = '';
+            cartas.forEach((carta, index) => {
+                const li = document.createElement('li');
+                const iconoCarta = document.createElement('div');
+                iconoCarta.className = 'icono-carta';
+                iconoCarta.innerHTML = '💌';
+                iconoCarta.onclick = function() {
+                    abrirModal(carta);
+                };
+                const textoCarta = document.createElement('span');
+                textoCarta.className = 'texto-carta';
+                textoCarta.textContent = 'Pincha en la carta para verla';
+                const btnBorrar = document.createElement('button');
+                btnBorrar.textContent = 'Borrar';
+                btnBorrar.className = 'btn btn-danger btn-borrar';
+                btnBorrar.onclick = function() {
+                    borrarCarta(index);
+                };
+                li.appendChild(iconoCarta);
+                li.appendChild(textoCarta);
+                li.appendChild(btnBorrar);
+                listaCartas.appendChild(li);
+            });
+        }
+
+        function abrirModal(carta) {
+            const modal = document.getElementById('modalCarta');
+            const contenidoCarta = document.getElementById('contenidoCarta');
+            contenidoCarta.textContent = carta;
+            modal.style.display = 'flex'; // Cambia a 'flex' para centrar verticalmente
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById('modalCarta');
+            modal.style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', mostrarCartas);
+    </script>
+</body>
+</html>
